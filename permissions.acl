@@ -11,14 +11,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-rule Default {
-    description: "Allow all participants access to all resources"
-    participant: "ANY"
+rule R3b_GovtTransView {
+    description: "Grant Govt full access to Transactions"
+    participant: "org.test.pothole.Govt"
     operation: ALL
-    resource: "org.acme.cycle.pothole.*"
+    resource: "org.test.pothole.PotholeSent"
+    action: ALLOW
+}
+rule R3a_NgoTransView {
+    description: "Grant NGO full access to Transactions"
+    participant: "org.test.pothole.NGO"
+    operation: ALL
+    resource: "org.test.pothole.PotholeSent"
     action: ALLOW
 }
 
+rule R2_EnableTxn {
+    description: "Enable Citizen to submit transactions"
+    participant: "org.test.pothole.Citizen"
+    operation: ALL
+    resource: "org.test.pothole.PotholeSent"
+    action: ALLOW
+}
+
+rule R1b_CitizenSeeTheirPotholes {
+  description: "Citizen can see own submitted Potholes"
+  participant(t): "org.test.pothole.Citizen"
+  operation: ALL
+  resource(c): "org.test.pothole.Pothole"
+  condition: (c.citizen.getIdentifier() == t.getIdentifier())
+  action: ALLOW
+}
+
+rule R1a_CitizenSeeThemselvesOnly {
+  description: "Citizen can see their own record only"
+  participant(t): "org.test.pothole.Citizen"
+  operation: READ, UPDATE
+  resource(v): "org.test.pothole.Citizen"
+  condition: (v.getIdentifier() == t.getIdentifier())
+  action: ALLOW
+}
 rule SystemACL {
     description:  "System ACL to permit all access"
     participant: "org.hyperledger.composer.system.Participant"

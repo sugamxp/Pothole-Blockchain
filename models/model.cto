@@ -12,11 +12,46 @@
  * limitations under the License.
  */
 
-namespace org.acme.cycle.pothole
+/**
+ * Write your model definitions here
+ */
+
+namespace org.test.pothole
+
 enum PotholeStatus {
   o CREATED
   o IN_PROCESS
   o FIXED
+}
+
+asset Pothole identified by pid{
+  o String pid
+  o String location
+  o PotholeStatus status
+  o Double height
+  o Double width
+  o Double depth
+  --> Citizen citizen
+  
+}
+
+
+participant Citizen identified by cid {
+  o String cid
+  o String first_name
+  o String last_name
+}
+
+participant Govt identified by gid{
+  o String gid
+  o String dept_name
+  o String dept_loc
+}
+
+participant NGO identified by nid{
+  o String nid
+  o String name
+  o String loc
 }
 
 abstract transaction PotholeTransaction {
@@ -24,40 +59,12 @@ abstract transaction PotholeTransaction {
 }
 
 
-transaction PotholeReceived extends PotholeTransaction {
+transaction PotholeSent extends PotholeTransaction{
 }
 
 
-
-asset Pothole identified by potholeId {
-  o String potholeId
-  o String location
-  o PotholeStatus status
-o Double height
-  o Double width
-    --> Contract contract
+transaction PotholeFixed extends PotholeTransaction {
 }
 
-asset Contract identified by contractId {
-  o String contractId
-  --> Citizen citizen
-  --> Govt govt
-  --> Ngo ngo
-} 
-
-abstract participant Users identified by userName {
-  o String userName
-}
-
-participant Citizen extends Users {
-}
-
-
-participant Govt extends Users {
-}
-
-
-participant Ngo extends Users {
-}
 
 
