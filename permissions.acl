@@ -11,10 +11,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+rule R6b_NGOTransView {
+    description: "Grant NGO read access to Sent Transactions"
+    participant: "org.test.pothole.NGO"
+    operation: READ
+    resource: "org.test.pothole.PotholeFixed"
+    action: ALLOW
+}
+
+rule R5_GovtAllPotholes{
+  description: "Govt can view all potholes"
+  participant: "org.test.pothole.Govt"
+  operation: READ, UPDATE
+  resource: "org.test.pothole.Pothole"
+  action: ALLOW
+}
+rule R4_GovtEnableTxn {
+    description: "Enable Govt to submit transactions"
+    participant: "org.test.pothole.Govt"
+    operation: ALL
+    resource: "org.test.pothole.PotholeFixed"
+    action: ALLOW
+}
+
 rule R3b_GovtTransView {
     description: "Grant Govt full access to Transactions"
     participant: "org.test.pothole.Govt"
-    operation: ALL
+    operation: READ
     resource: "org.test.pothole.PotholeSent"
     action: ALLOW
 }
