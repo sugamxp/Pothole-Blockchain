@@ -26,6 +26,15 @@ rule R5_GovtAllPotholes{
   resource: "org.test.pothole.Pothole"
   action: ALLOW
 }
+
+rule NGOViewPothole{
+  description: "Govt can view all potholes"
+  participant: "org.test.pothole.NGO"
+  operation: READ
+  resource: "org.test.pothole.Pothole"
+  action: ALLOW
+}
+
 rule R4_GovtEnableTxn {
     description: "Enable Govt to submit transactions"
     participant: "org.test.pothole.Govt"
