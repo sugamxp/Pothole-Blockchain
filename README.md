@@ -1,26 +1,26 @@
 # Pothole-Blockchain
 
 ## Hyperledger Composer
-___
+
 Hyperledger Composer is a programming model containing a modeling language, and a set of APIs to quickly define and deploy business networks and applications that allow participants to send transactions that exchange assets
 
 
 ## Assets
-___
+
 Assets are tangible or intangible goods, services, or property, and are stored in registries.
 
 ## Participants
-___
+
 Participants are members of a business network. They may own assets and submit transactions.
 
 ## Transactions
-___
+
 Transactions are the mechanism by which participants interact with assets.
 
 ![Image](images/image.svg)
 
 ## Pothole-Example
-___
+
 
 This examples include the following components :
 
